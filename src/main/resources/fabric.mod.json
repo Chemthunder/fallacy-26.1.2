@@ -1,0 +1,30 @@
+{
+	"schemaVersion": 1,
+	"id": "fallacy",
+	"version": "${version}",
+	"name": "Fallacy",
+	"description": "",
+	"authors": [
+		"Chemthunder"
+	],
+	"license": "ARR",
+	"icon": "assets/fallacy/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+          "com.peak.fallacy.core.Fallacy"
+		],
+		"fabric-datagen": [
+          "com.peak.fallacy.datagen.FallacyDataGenerator"
+		]
+	},
+	"mixins": [
+		"fallacy.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.11",
+		"minecraft": "~26.1.2",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}
