@@ -20,6 +20,15 @@ public class ModTestItem extends Item {
 
         player.sendOverlayMessage(Component.literal("test!"));
 
+        level.explode(
+                player,
+                player.getX(),
+                player.getY(),
+                player.getZ(),
+                5,
+                Level.ExplosionInteraction.TRIGGER
+        );
+
         return super.use(level, player, hand);
     }
 }
