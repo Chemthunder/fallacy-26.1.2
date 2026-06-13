@@ -1,5 +1,7 @@
 package com.peak.fallacy.core.item;
 
+import com.peak.fallacy.core.cca.entity.FollowerComponent;
+import com.peak.fallacy.core.index.FallacyPatrons;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -16,18 +18,10 @@ public class ModTestItem extends Item {
         super(properties);
     }
 
-    public @NotNull InteractionResult use(Level level, Player player, InteractionHand hand) {
-
+    public InteractionResult use(Level level, Player player, InteractionHand hand) {
         player.sendOverlayMessage(Component.literal("test!"));
 
-        level.explode(
-                player,
-                player.getX(),
-                player.getY(),
-                player.getZ(),
-                5,
-                Level.ExplosionInteraction.TRIGGER
-        );
+        FollowerComponent.KEY.get(player).setPatron(FallacyPatrons.WINDSEEKER);
 
         return super.use(level, player, hand);
     }

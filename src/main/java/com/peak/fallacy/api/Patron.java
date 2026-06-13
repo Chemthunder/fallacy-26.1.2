@@ -1,7 +1,8 @@
-package com.peak.fallacy.core.primary;
+package com.peak.fallacy.api;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.peak.fallacy.core.index.FallacyPatrons;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.world.InteractionHand;
@@ -9,7 +10,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
-@SuppressWarnings({"ClassCanBeRecord", "unused"})
+@SuppressWarnings({"unused"})
 public class Patron {
     private final Component name;
     private final Component title;
@@ -44,4 +45,8 @@ public class Patron {
             ComponentSerialization.CODEC.optionalFieldOf("title", Component.empty()).forGetter(Patron::getTitle),
             Codec.BOOL.optionalFieldOf("cursed", false).forGetter(Patron::isCursed)
     ).apply(instance, Patron::new));
+
+    public boolean isEmpty() {
+        return this == FallacyPatrons.EMPTY;
+    }
 }

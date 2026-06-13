@@ -1,7 +1,7 @@
 package com.peak.fallacy.compat.regist;
 
 import com.peak.fallacy.core.index.FallacyRegistries;
-import com.peak.fallacy.core.primary.Patron;
+import com.peak.fallacy.api.Patron;
 import net.acoyt.acornlib.api.template.RegistrantBase;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.core.HolderLookup;
