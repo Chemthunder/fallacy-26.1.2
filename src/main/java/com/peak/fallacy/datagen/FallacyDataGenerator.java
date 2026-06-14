@@ -12,5 +12,6 @@ public class FallacyDataGenerator implements DataGeneratorEntrypoint {
         var pack = fdg.createPack();
 
         pack.addProvider(FallacyResources.Language::new);
+        pack.addProvider(FallacyResources.Model::new);
 	}
 }

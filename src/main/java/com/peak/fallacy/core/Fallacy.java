@@ -1,10 +1,10 @@
 package com.peak.fallacy.core;
 
-import com.peak.fallacy.core.index.FallacyItems;
-import com.peak.fallacy.core.index.FallacyRegistries;
-import com.peak.fallacy.core.index.FallacyPatrons;
+import com.peak.fallacy.core.index.*;
+import net.acoyt.acornlib.api.ALib;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.block.Blocks;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,8 +20,20 @@ public class Fallacy implements ModInitializer {
         FallacyPatrons.init();
 
         FallacyItems.init();
+        FallacyCreativeModeTabs.init();
+        FallacyDataComponentTypes.init();
 
 		LOGGER.info("Hello Fabric world!");
+
+        ALib.registerModIcon(
+                MOD_ID,
+                Fallacy.id("textures/item/cursed_tablet_guy.png")
+        );
+
+        ALib.registerModMenu(
+                MOD_ID,
+                0xFF4e1e3b
+        );
 	}
 
     public static Identifier id(String path) {

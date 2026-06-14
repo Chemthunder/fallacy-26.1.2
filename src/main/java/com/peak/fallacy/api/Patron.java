@@ -2,9 +2,13 @@ package com.peak.fallacy.api;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.peak.fallacy.core.cca.entity.FollowerComponent;
 import com.peak.fallacy.core.index.FallacyPatrons;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -15,11 +19,13 @@ public class Patron {
     private final Component name;
     private final Component title;
     private final boolean cursed;
+    private final int color;
 
-    public Patron(Component name, Component title, boolean cursed) {
+    public Patron(Component name, Component title, boolean cursed, int color) {
         this.name = name;
         this.title = title;
         this.cursed = cursed;
+        this.color = color;
     }
 
     public boolean isCursed() {
@@ -34,6 +40,10 @@ public class Patron {
         return this.title;
     }
 
+    public int getColor() {
+        return this.color;
+    }
+
     public void tick(Player player, Level level) {}
 
     public void onHit(Player player, LivingEntity target, Level level, InteractionHand hand) {}
@@ -43,8 +53,16 @@ public class Patron {
     public static final Codec<Patron> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             ComponentSerialization.CODEC.optionalFieldOf("name", Component.empty()).forGetter(Patron::getName),
             ComponentSerialization.CODEC.optionalFieldOf("title", Component.empty()).forGetter(Patron::getTitle),
-            Codec.BOOL.optionalFieldOf("cursed", false).forGetter(Patron::isCursed)
+            Codec.BOOL.optionalFieldOf("cursed", false).forGetter(Patron::isCursed),
+            Codec.INT.optionalFieldOf("color", 0).forGetter(Patron::getColor)
     ).apply(instance, Patron::new));
+
+    public static final StreamCodec<ByteBuf, Patron> PACKET_CODEC = ByteBufCodecs.fromCodec(CODEC);
+
+    public static Patron getPatron(Player player) {
+        FollowerComponent component = FollowerComponent.KEY.get(player);
+        return component.getPatron();
+    }
 
     public boolean isEmpty() {
         return this == FallacyPatrons.EMPTY;

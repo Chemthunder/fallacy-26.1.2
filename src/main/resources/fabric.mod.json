@@ -3,9 +3,12 @@
   "id": "fallacy",
   "version": "${version}",
   "name": "Fallacy",
-  "description": "",
+  "description": "bisexual lighting",
   "authors": [
     "Chemthunder"
+  ],
+  "contributors": [
+    "shivangel - Textures"
   ],
   "license": "ARR",
   "icon": "assets/fallacy/icon.png",
@@ -13,6 +16,9 @@
   "entrypoints": {
     "main": [
       "com.peak.fallacy.core.Fallacy"
+    ],
+    "client": [
+      "com.peak.fallacy.core.FallacyClient"
     ],
     "fabric-datagen": [
       "com.peak.fallacy.datagen.FallacyDataGenerator"

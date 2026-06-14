@@ -1,6 +1,10 @@
 {
+  "item.fallacy.cursed_tablet": "Cursed Tablet",
+  "item.fallacy.cursed_tablet.cursed": "This tablet is cursed!",
   "patron.fallacy.empty": "Empty.",
   "patron.fallacy.empty.title": "Nothing lies in this basin.",
   "patron.fallacy.fatespeaker": "The Fatespeaker",
-  "patron.fallacy.fatespeaker.title": "Queen of What Becomes"
+  "patron.fallacy.fatespeaker.title": "Queen of What Becomes",
+  "patron.fallacy.windseeker": "Mistress Windseeker",
+  "patron.fallacy.windseeker.title": "Fox of the Nine Winds"
 }

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "fallacy:item/cursed_tablet",
+    "layer1": "fallacy:item/cursed_tablet_guy"
+  }
+}

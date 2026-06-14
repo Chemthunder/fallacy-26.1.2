@@ -15,7 +15,8 @@ public class WindseekerPatron extends Patron {
         super(
                 Component.translatable("patron.fallacy.windseeker"),
                 Component.translatable("patron.fallacy.windseeker.title"),
-                false
+                false,
+                0xFF34ebbd
         );
     }
 

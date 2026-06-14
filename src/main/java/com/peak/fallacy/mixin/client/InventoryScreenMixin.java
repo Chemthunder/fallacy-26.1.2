@@ -22,7 +22,7 @@ public class InventoryScreenMixin {
 
         if (client.player != null) {
             if (!FollowerComponent.KEY.get(client.player).getPatron().isEmpty()) {
-                PatronContext.renderInventoryWhatnots(
+                PatronContext.renderInventoryTooltip(
                         graphics,
                         mouseX,
                         mouseY,
