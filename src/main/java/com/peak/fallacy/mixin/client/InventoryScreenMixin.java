@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * @author Chemthunder
  */
 @Mixin(value = InventoryScreen.class)
-public class InventoryScreenMixin {
+public abstract class InventoryScreenMixin {
 
     @Inject(method = "extractBackground", at = @At(value = "TAIL"))
     private void fallacy$inventorySprites(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a, CallbackInfo ci) {

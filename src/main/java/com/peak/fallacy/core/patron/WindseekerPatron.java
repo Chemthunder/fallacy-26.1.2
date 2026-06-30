@@ -20,7 +20,7 @@ public class WindseekerPatron extends Patron {
         );
     }
 
-    public void onHit(Player player, LivingEntity target, Level level, InteractionHand hand) {
+    public void onAttack(Player player, LivingEntity target, Level level, InteractionHand hand) {
         //
     }
 }

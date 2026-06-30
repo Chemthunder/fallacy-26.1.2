@@ -1,7 +1,10 @@
 package com.peak.fallacy.datagen.provider;
 
+import com.peak.fallacy.api.Patron;
 import com.peak.fallacy.core.client.item.tint.TabletTintSource;
 import com.peak.fallacy.core.index.FallacyItems;
+import com.peak.fallacy.core.index.FallacyPatrons;
+import com.peak.fallacy.core.index.FallacyRegistries;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
@@ -12,7 +15,7 @@ import net.minecraft.client.data.models.model.*;
 import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.item.Item;
+import net.minecraft.resources.ResourceKey;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -25,17 +28,39 @@ public class FallacyResources {
         public void generateTranslations(HolderLookup.Provider provider, TranslationBuilder translationBuilder) {
             FallacyItems.ITEMS.registerLang(provider, translationBuilder);
 
-            translationBuilder.add("patron.fallacy.empty", "Empty.");
-            translationBuilder.add("patron.fallacy.empty.title", "Nothing lies in this basin.");
+            translatePatron(FallacyPatrons.EMPTY,
+                    "Empty.",
+                    "Nothing lies in this basin.",
+                    translationBuilder
+            );
 
-            translationBuilder.add("patron.fallacy.fatespeaker", "The Fatespeaker");
-            translationBuilder.add("patron.fallacy.fatespeaker.title", "Queen of What Becomes");
+            translatePatron(FallacyPatrons.FATESPEAKER,
+                    "The Fatespeaker",
+                    "Queen of What Is, Becomes, and Will Be.",
+                    translationBuilder
+            );
 
-            translationBuilder.add("patron.fallacy.windseeker", "Mistress Windseeker");
-            translationBuilder.add("patron.fallacy.windseeker.title", "Fox of the Nine Winds");
+            translatePatron(FallacyPatrons.WINDSEEKER,
+                    "Mistress Windseeker",
+                    "Fox of the Nine Winds.",
+                    translationBuilder
+            );
+
+            translatePatron(FallacyPatrons.MOSSWALKER,
+                    "The Ancestral Mosswalker",
+                    "Ruler of the Divine Groves.",
+                    translationBuilder
+            );
 
             translationBuilder.add("item.fallacy.cursed_tablet.cursed", "This tablet is cursed!");
         }
+    }
+
+    public static void translatePatron(Patron patron, String name, String title, FabricLanguageProvider.TranslationBuilder translationBuilder) {
+        Identifier id = FallacyRegistries.PATRON.getKey(patron);
+
+        translationBuilder.add("patron." + id.getNamespace() + "." + id.getPath(), name);
+        translationBuilder.add("patron." + id.getNamespace() + "." + id.getPath() + ".title", title);
     }
 
     public static class Model extends FabricModelProvider {
@@ -46,11 +71,11 @@ public class FallacyResources {
         public void generateBlockStateModels(BlockModelGenerators blockModelGenerators) {}
 
         public void generateItemModels(ItemModelGenerators gen) {
-            createTablet(gen, FallacyItems.CURSED_TABLET);
+            createTablet(gen);
         }
 
-        private static void createTablet(ItemModelGenerators generator, Item item) {
-            Identifier itemId = ModelLocationUtils.getModelLocation(item);
+        private static void createTablet(ItemModelGenerators generator) {
+            Identifier itemId = ModelLocationUtils.getModelLocation(FallacyItems.CURSED_TABLET);
 
             ModelTemplates.TWO_LAYERED_ITEM.create(
                     itemId,
@@ -59,7 +84,7 @@ public class FallacyResources {
                     generator.modelOutput
             );
 
-            generator.itemModelOutput.accept(item, ItemModelUtils.tintedModel(itemId, new Constant(0xFFFFFFFF), new TabletTintSource()));
+            generator.itemModelOutput.accept(FallacyItems.CURSED_TABLET, ItemModelUtils.tintedModel(itemId, new Constant(0xFFFFFFFF), new TabletTintSource()));
         }
     }
 }

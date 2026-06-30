@@ -10,6 +10,7 @@ import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -44,15 +45,22 @@ public class Patron {
         return this.color;
     }
 
+    /// OVERRIDES
     public void tick(Player player, Level level) {}
 
-    public void onHit(Player player, LivingEntity target, Level level, InteractionHand hand) {}
+    public void onAttack(Player player, LivingEntity target, Level level, InteractionHand hand) {}
 
     public void onUseKeybind(Player player, Level level) {}
+
+    public void onSneak(Player player, Level level) {}
+
+    public void onDamage(Player player, Level level, DamageSource source) {}
+
 
     public static final Codec<Patron> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             ComponentSerialization.CODEC.optionalFieldOf("name", Component.empty()).forGetter(Patron::getName),
             ComponentSerialization.CODEC.optionalFieldOf("title", Component.empty()).forGetter(Patron::getTitle),
+
             Codec.BOOL.optionalFieldOf("cursed", false).forGetter(Patron::isCursed),
             Codec.INT.optionalFieldOf("color", 0).forGetter(Patron::getColor)
     ).apply(instance, Patron::new));
