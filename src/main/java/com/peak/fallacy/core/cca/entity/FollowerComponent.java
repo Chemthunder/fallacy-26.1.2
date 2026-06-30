@@ -3,6 +3,7 @@ package com.peak.fallacy.core.cca.entity;
 import com.peak.fallacy.api.Patron;
 import com.peak.fallacy.core.Fallacy;
 import com.peak.fallacy.core.index.FallacyPatrons;
+import com.peak.fallacy.core.index.FallacyRegistries;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
@@ -23,7 +24,7 @@ public class FollowerComponent implements AutoSyncedComponent, CommonTickingComp
     );
     private final Player player;
 
-    private @Nullable Patron patron = FallacyPatrons.EMPTY;
+    private Patron patron = FallacyPatrons.EMPTY;
 
     public FollowerComponent(Player player) {
         this.player = player;
@@ -33,6 +34,10 @@ public class FollowerComponent implements AutoSyncedComponent, CommonTickingComp
         if (this.patron != null) {
             this.patron.tick(player, player.level());
         }
+
+        if (this.player.isCrouching() && this.player.tickCount % 5 == 0 && this.patron != null) {
+            Fallacy.LOGGER.info("[{}]: Patron is {}", (this.player.level().isClientSide() ? "Client" : "Server"), FallacyRegistries.PATRON.getKey(this.patron));
+        }
     }
 
     public void sync() {
@@ -40,13 +45,11 @@ public class FollowerComponent implements AutoSyncedComponent, CommonTickingComp
     }
 
     public void readData(ValueInput valueInput) {
-        if (this.patron != FallacyPatrons.EMPTY) {
-            this.patron = valueInput.read("patron", Patron.CODEC).orElseThrow();
-        }
+       this.patron = valueInput.read("patron", Patron.CODEC).orElse(FallacyPatrons.EMPTY);
     }
 
     public void writeData(ValueOutput valueOutput) {
-        valueOutput.storeNullable("patron", Patron.CODEC, this.patron);
+        valueOutput.store("patron", Patron.CODEC, this.patron);
     }
 
     public @Nullable Patron getPatron() {

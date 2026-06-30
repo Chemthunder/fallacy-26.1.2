@@ -4,27 +4,47 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.peak.fallacy.core.cca.entity.FollowerComponent;
 import com.peak.fallacy.core.index.FallacyPatrons;
+import com.peak.fallacy.core.index.FallacyRegistries;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 @SuppressWarnings({"unused"})
 public class Patron {
     private final Component name;
     private final Component title;
+    private final Component slogan;
+
     private final boolean cursed;
     private final int color;
 
-    public Patron(Component name, Component title, boolean cursed, int color) {
+    public Patron(Component name, Component title, Component slogan, boolean cursed, int color) {
         this.name = name;
         this.title = title;
+        this.slogan = slogan;
+
+        this.cursed = cursed;
+        this.color = color;
+    }
+
+    public Patron(Identifier id, boolean cursed, int color) {
+        String base = "patron." + id.getNamespace() + "." + id.getPath();
+
+        this.name = Component.translatable(base);
+        this.title = Component.translatable(base + ".title");
+        this.slogan = Component.translatable(base + ".slogan");
+
         this.cursed = cursed;
         this.color = color;
     }
@@ -39,6 +59,10 @@ public class Patron {
 
     public Component getTitle() {
         return this.title;
+    }
+
+    public Component getSlogan() {
+        return this.slogan;
     }
 
     public int getColor() {
@@ -56,10 +80,10 @@ public class Patron {
 
     public void onDamage(Player player, Level level, DamageSource source) {}
 
-
     public static final Codec<Patron> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             ComponentSerialization.CODEC.optionalFieldOf("name", Component.empty()).forGetter(Patron::getName),
             ComponentSerialization.CODEC.optionalFieldOf("title", Component.empty()).forGetter(Patron::getTitle),
+            ComponentSerialization.CODEC.optionalFieldOf("slogan", Component.empty()).forGetter(Patron::getSlogan),
 
             Codec.BOOL.optionalFieldOf("cursed", false).forGetter(Patron::isCursed),
             Codec.INT.optionalFieldOf("color", 0).forGetter(Patron::getColor)

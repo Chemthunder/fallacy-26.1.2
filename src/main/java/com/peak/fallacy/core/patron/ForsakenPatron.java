@@ -7,8 +7,8 @@ import static com.peak.fallacy.core.Fallacy.id;
 /**
  * @author Chemthunder
  */
-public class MosswalkerPatron extends Patron {
-    public MosswalkerPatron() {
-        super(id("mosswalker"),false, 0xFF17472d);
+public class ForsakenPatron extends Patron {
+    public ForsakenPatron() {
+        super(id("forsaken"), true, 0xFFbcbbbb);
     }
 }

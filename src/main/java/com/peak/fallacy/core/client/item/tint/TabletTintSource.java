@@ -2,7 +2,6 @@ package com.peak.fallacy.core.client.item.tint;
 
 import com.mojang.serialization.MapCodec;
 import com.peak.fallacy.api.Patron;
-import com.peak.fallacy.core.index.FallacyCreativeModeTabs;
 import com.peak.fallacy.core.index.FallacyDataComponentTypes;
 import net.minecraft.client.color.item.ItemTintSource;
 import net.minecraft.client.multiplayer.ClientLevel;

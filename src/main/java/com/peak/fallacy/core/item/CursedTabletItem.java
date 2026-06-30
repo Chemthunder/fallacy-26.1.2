@@ -6,15 +6,16 @@ import com.peak.fallacy.core.cca.entity.FollowerComponent;
 import com.peak.fallacy.core.index.FallacyDataComponentTypes;
 import com.peak.fallacy.core.index.FallacyPatrons;
 import com.peak.fallacy.core.index.FallacyRegistries;
+import com.peak.fallacy.core.item.utilities.TabletTooltipData;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -23,6 +24,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Blocks;
 import org.jspecify.annotations.Nullable;
 
+import java.util.Optional;
 import java.util.Random;
 import java.util.function.Consumer;
 
@@ -81,5 +83,9 @@ public class CursedTabletItem extends Item {
             return super.getName(itemStack).copy().withStyle(ChatFormatting.RED);
         }
         return super.getName(itemStack);
+    }
+
+    public Optional<TooltipComponent> getTooltipImage(ItemStack itemStack) {
+        return Optional.of(new TabletTooltipData(itemStack));
     }
 }

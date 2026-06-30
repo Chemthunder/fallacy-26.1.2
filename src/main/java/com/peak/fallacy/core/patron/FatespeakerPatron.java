@@ -6,17 +6,14 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
+import static com.peak.fallacy.core.Fallacy.id;
+
 /**
  * @author Chemthunder
  */
 public class FatespeakerPatron extends Patron {
     public FatespeakerPatron() {
-        super(
-                Component.translatable("patron.fallacy.fatespeaker"),
-                Component.translatable("patron.fallacy.fatespeaker.title"),
-                true,
-                0xFFaa07ff
-        );
+        super(id("fatespeaker"),true, 0xFFaa07ff);
     }
 
     public void onSneak(Player player, Level level) {
@@ -25,5 +22,13 @@ public class FatespeakerPatron extends Patron {
         );
 
         Fallacy.LOGGER.info("Sneaked");
+    }
+
+    public void onUseKeybind(Player player, Level level) {
+        player.sendOverlayMessage(
+                Component.literal("<o>")
+        );
+
+        Fallacy.LOGGER.info("Help");
     }
 }

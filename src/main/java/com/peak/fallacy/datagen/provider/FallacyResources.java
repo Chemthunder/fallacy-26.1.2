@@ -15,7 +15,6 @@ import net.minecraft.client.data.models.model.*;
 import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.Identifier;
-import net.minecraft.resources.ResourceKey;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -31,24 +30,35 @@ public class FallacyResources {
             translatePatron(FallacyPatrons.EMPTY,
                     "Empty.",
                     "Nothing lies in this basin.",
+                    "",
                     translationBuilder
             );
 
             translatePatron(FallacyPatrons.FATESPEAKER,
                     "The Fatespeaker",
                     "Queen of What Is, Becomes, and Will Be.",
+                    "Look to the Future.",
                     translationBuilder
             );
 
             translatePatron(FallacyPatrons.WINDSEEKER,
                     "Mistress Windseeker",
                     "Fox of the Nine Winds.",
+                    "Sail the Skies.",
                     translationBuilder
             );
 
             translatePatron(FallacyPatrons.MOSSWALKER,
                     "The Ancestral Mosswalker",
                     "Ruler of the Divine Groves.",
+                    "Seek the Woods.",
+                    translationBuilder
+            );
+
+            translatePatron(FallacyPatrons.FORSAKEN,
+                    "The Forsaken Echo",
+                    "The Banished One.",
+                    "Forget Me.",
                     translationBuilder
             );
 
@@ -56,11 +66,12 @@ public class FallacyResources {
         }
     }
 
-    public static void translatePatron(Patron patron, String name, String title, FabricLanguageProvider.TranslationBuilder translationBuilder) {
+    public static void translatePatron(Patron patron, String name, String title, String slogan, FabricLanguageProvider.TranslationBuilder translationBuilder) {
         Identifier id = FallacyRegistries.PATRON.getKey(patron);
 
         translationBuilder.add("patron." + id.getNamespace() + "." + id.getPath(), name);
         translationBuilder.add("patron." + id.getNamespace() + "." + id.getPath() + ".title", title);
+        translationBuilder.add("patron." + id.getNamespace() + "." + id.getPath() + ".slogan", slogan);
     }
 
     public static class Model extends FabricModelProvider {

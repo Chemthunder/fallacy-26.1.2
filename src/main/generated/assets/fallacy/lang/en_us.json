@@ -2,11 +2,18 @@
   "item.fallacy.cursed_tablet": "Cursed Tablet",
   "item.fallacy.cursed_tablet.cursed": "This tablet is cursed!",
   "patron.fallacy.empty": "Empty.",
+  "patron.fallacy.empty.slogan": "",
   "patron.fallacy.empty.title": "Nothing lies in this basin.",
   "patron.fallacy.fatespeaker": "The Fatespeaker",
+  "patron.fallacy.fatespeaker.slogan": "Look to the Future.",
   "patron.fallacy.fatespeaker.title": "Queen of What Is, Becomes, and Will Be.",
+  "patron.fallacy.forsaken": "The Forsaken Echo",
+  "patron.fallacy.forsaken.slogan": "Forget Me.",
+  "patron.fallacy.forsaken.title": "The Banished One.",
   "patron.fallacy.mosswalker": "The Ancestral Mosswalker",
+  "patron.fallacy.mosswalker.slogan": "Seek the Woods.",
   "patron.fallacy.mosswalker.title": "Ruler of the Divine Groves.",
   "patron.fallacy.windseeker": "Mistress Windseeker",
+  "patron.fallacy.windseeker.slogan": "Sail the Skies.",
   "patron.fallacy.windseeker.title": "Fox of the Nine Winds."
 }

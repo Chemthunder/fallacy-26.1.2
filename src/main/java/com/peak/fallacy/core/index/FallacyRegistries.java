@@ -1,7 +1,7 @@
 package com.peak.fallacy.core.index;
 
-import com.peak.fallacy.core.Fallacy;
 import com.peak.fallacy.api.Patron;
+import com.peak.fallacy.core.Fallacy;
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
 import net.fabricmc.fabric.api.event.registry.RegistryAttribute;
 import net.minecraft.core.Registry;

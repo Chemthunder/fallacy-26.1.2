@@ -4,7 +4,6 @@ import com.peak.fallacy.core.index.*;
 import net.acoyt.acornlib.api.ALib;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.level.block.Blocks;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,12 +17,14 @@ public class Fallacy implements ModInitializer {
 	public void onInitialize() {
         FallacyRegistries.init();
         FallacyPatrons.init();
-
         FallacyItems.init();
         FallacyCreativeModeTabs.init();
         FallacyDataComponentTypes.init();
+        FallacyNetworking.init();
 
-		LOGGER.info("Hello Fabric world!");
+        FallacyNetworking.serverbound();
+
+		LOGGER.info("Registration Completed");
 
         ALib.registerModIcon(
                 MOD_ID,
@@ -40,7 +41,3 @@ public class Fallacy implements ModInitializer {
         return Identifier.fromNamespaceAndPath(MOD_ID, path);
     }
 }
-
-/**
- * Cult mod if it was good
- */
